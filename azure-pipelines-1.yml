@@ -1,0 +1,36 @@
+# azure-pipelines.yml
+
+trigger:
+- main  # or your default branch
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  htmlDirectory: 'html'
+
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: Build
+    displayName: 'Build Job'
+    steps:
+    - script: |
+        echo "Building the HTML project..."
+        # No actual build commands needed for simple HTML pages
+      displayName: 'Build HTML'
+
+- stage: Test
+  displayName: 'Test Stage'
+  dependsOn: Build
+  jobs:
+  - job: Test
+    displayName: 'Test Job'
+    steps:
+    - script: |
+        echo "Running tests..."
+        # Add any test commands here if necessary
+        echo "No tests for plain HTML pages"
+      displayName: 'Run Tests'
